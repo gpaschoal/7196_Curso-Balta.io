@@ -1,4 +1,6 @@
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Todo.Domain.Commands;
 
 namespace Todo.Domain.Tests.CommandTests
 {
@@ -8,15 +10,17 @@ namespace Todo.Domain.Tests.CommandTests
     [TestMethod]
     public void DadoUmCommandInvalido()
     {
-
-      Assert.Fail();
+      var command = new CreateTodoCommand("", DateTime.Now, "");
+      command.Validate();
+      Assert.AreEqual(command.Valid, false);
     }
 
     [TestMethod]
     public void DadoUmCommandValido()
     {
-
-      Assert.Equals();
+      var command = new CreateTodoCommand("Titulo exemplo", DateTime.Now, "Guilherme");
+      command.Validate();
+      Assert.AreEqual(command.Valid, true);
     }
   }
 }
