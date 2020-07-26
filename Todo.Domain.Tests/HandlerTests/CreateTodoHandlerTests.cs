@@ -2,6 +2,7 @@ using System;
 using Todo.Domain.Commands;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Todo.Domain.Handlers;
+using Todo.Domain.Tests.Repositories;
 
 namespace Todo.Domain.Tests.HandlerTests
 {
@@ -22,7 +23,7 @@ namespace Todo.Domain.Tests.HandlerTests
     [TestMethod]
     public void DadoUmCommandInvalidoDeveInterromperAExecucao()
     {
-      var handler = new TodoHandler(null);
+      var handler = new TodoHandler(new FakeTodoRepository());
       Assert.Fail();
     }
 
