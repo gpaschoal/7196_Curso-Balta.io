@@ -10,7 +10,7 @@ namespace Todo.Domain.Tests.Repositories
 
     public TodoItem GetById(Guid id, string user)
     {
-      throw new NotImplementedException();
+      return new TodoItem("Titulo aqui", DateTime.Now, user);
     }
 
     public void Update(TodoItem todo) { }
