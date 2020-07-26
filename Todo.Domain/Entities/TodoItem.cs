@@ -5,7 +5,7 @@ namespace Todo.Domain.Entities
 {
   public class TodoItem : Entity
   {
-    public TodoItem(string title, bool done, DateTime date, string user)
+    public TodoItem(string title, DateTime date, string user)
     {
       Title = title;
       Done = false;
