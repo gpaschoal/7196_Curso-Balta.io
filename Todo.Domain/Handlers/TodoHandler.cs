@@ -58,12 +58,42 @@ namespace Todo.Domain.Handlers
 
     public ICommandResult Handlers(MarkTodoAsDoneCommand command)
     {
-      throw new System.NotImplementedException();
+      // Fail Fast Validation
+      command.Validate();
+      if (command.Invalid)
+        return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
+
+      // Salvar um todo no banco
+      var todoItem = _repository.GetById(command.Id, command.User);
+
+      // Altera o estado
+      todoItem.MarkAsDone();
+
+      // Salvando no banco
+      _repository.Update(todoItem);
+
+      //Notificar o usuário
+      return new GenericCommandResult(true, "Tarefa Salva", todoItem);
     }
 
     public ICommandResult Handlers(MarkTodoAsUndoneCommand command)
     {
-      throw new System.NotImplementedException();
+      // Fail Fast Validation
+      command.Validate();
+      if (command.Invalid)
+        return new GenericCommandResult(false, "Ops, parece que sua tarefa está errada!", command.Notifications);
+
+      // Salvar um todo no banco
+      var todoItem = _repository.GetById(command.Id, command.User);
+
+      // Altera o estado
+      todoItem.MarkAsUnDone();
+
+      // Salvando no banco
+      _repository.Update(todoItem);
+
+      //Notificar o usuário
+      return new GenericCommandResult(true, "Tarefa Salva", todoItem);
     }
   }
 }
