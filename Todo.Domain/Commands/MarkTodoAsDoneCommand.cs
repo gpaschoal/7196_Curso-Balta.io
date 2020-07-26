@@ -5,11 +5,10 @@ using Todo.Domain.Commands.Contracts;
 
 namespace Todo.Domain.Commands
 {
-  public class MarkAsDoneCommand : Notifiable, ICommand
+  public class MarkTodoAsDoneCommand : Notifiable, ICommand
   {
-    public MarkAsDoneCommand() { }
-
-    public MarkAsDoneCommand(Guid id, string user)
+    public MarkTodoAsDoneCommand() { }
+    public MarkTodoAsDoneCommand(Guid id, string user)
     {
       Id = id;
       User = user;
