@@ -11,26 +11,28 @@ namespace Todo.Domain.Tests.HandlerTests
   {
     private readonly CreateTodoCommand _invalidCommand;
     private readonly CreateTodoCommand _validCommand;
+    private readonly TodoHandler _handler;
+    private GenericCommandResult _result;
 
     public CreateTodoHandlerTests()
     {
       _invalidCommand = new CreateTodoCommand("", DateTime.Now, "");
-      _invalidCommand.Validate();
       _validCommand = new CreateTodoCommand("Titulo exemplo", DateTime.Now, "Guilherme");
-      _validCommand.Validate();
+      _handler = new TodoHandler(new FakeTodoRepository());
     }
 
     [TestMethod]
     public void DadoUmCommandInvalidoDeveInterromperAExecucao()
     {
-      var handler = new TodoHandler(new FakeTodoRepository());
-      Assert.Fail();
+      _result = (GenericCommandResult)_handler.Handlers(_invalidCommand);
+      Assert.AreEqual(_result.Sucess, false);
     }
 
     [TestMethod]
     public void DadoUmCommandValidoDeveCriarATarefa()
     {
-      Assert.Fail();
+      _result = (GenericCommandResult)_handler.Handlers(_validCommand);
+      Assert.AreEqual(_result.Sucess, true);
     }
   }
 }
